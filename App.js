@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, Button, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  Button,
+  View,
+  TouchableOpacity
+} from "react-native";
 
 export default class App extends React.Component {
   state = {
@@ -19,24 +26,27 @@ export default class App extends React.Component {
     arr.splice(pos, 1);
     this.setState({ todo: arr });
   };
+
   renderTodos = () => {
     return this.state.todo.map(t => {
       return (
-        <Text
-          onPress={() => {
-            this.deleteTodo();
-          }}
-          key={t}
-        >
-          {t}
-        </Text>
+        <TouchableOpacity key={t}>
+          <Text
+            style={{ fontSize: 18 }}
+            onPress={() => {
+              this.deleteTodo(t);
+            }}
+          >
+            {t}
+          </Text>
+        </TouchableOpacity>
       );
     });
   };
   render() {
     return (
       <View style={styles.container}>
-        <Text>My Todo App</Text>
+        <Text style={styles.title}>My Todo App</Text>
 
         <TextInput
           style={styles.inputStyle}
@@ -52,15 +62,20 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
+    marginTop: 30,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    margin: 10
   },
   inputStyle: {
     height: 40,
     width: "80%",
     borderColor: "green",
     borderWidth: 1
+  },
+  title: {
+    fontSize: 30,
+    color: "green",
+    fontWeight: "bold"
   }
 });
