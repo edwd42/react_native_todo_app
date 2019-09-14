@@ -3,11 +3,14 @@ import { StyleSheet, Text, TextInput, Button, View } from "react-native";
 
 export default class App extends React.Component {
   state = {
-    todo: ["Learn React Native", "Build Apps"],
+    todo: [],
     text: ""
   };
   addTodo = () => {
-    this.setState({ todo: this.state.text });
+    let newTodo = this.state.text;
+    let arr = this.state.todo;
+    arr.push(newTodo);
+    this.setState({ todo: arr, text: "" });
   };
 
   renderTodos = () => {
@@ -23,6 +26,7 @@ export default class App extends React.Component {
         <TextInput
           style={styles.inputStyle}
           onChangeText={text => this.setState({ text })}
+          value={this.state.text}
         />
         <Button title="Add New Todo" onPress={this.addTodo} />
         {this.renderTodos()}
