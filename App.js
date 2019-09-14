@@ -13,9 +13,24 @@ export default class App extends React.Component {
     this.setState({ todo: arr, text: "" });
   };
 
+  deleteTodo = t => {
+    let arr = this.state.todo;
+    let pos = arr.indexOf(t);
+    arr.splice(pos, 1);
+    this.setState({ todo: arr });
+  };
   renderTodos = () => {
     return this.state.todo.map(t => {
-      return <Text key={t}>{t}</Text>;
+      return (
+        <Text
+          onPress={() => {
+            this.deleteTodo();
+          }}
+          key={t}
+        >
+          {t}
+        </Text>
+      );
     });
   };
   render() {
